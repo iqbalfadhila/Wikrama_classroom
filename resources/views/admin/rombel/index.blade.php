@@ -2,8 +2,8 @@
 @section('content')
 
 <div class="container">
-    <div class="row">
-        <div class="col-sm-4">
+    {{-- <div class="row"> --}}
+        {{-- <div class="col-sm-4">
             <div class="card">
                 <div class="card-header">
                     <div class="row">
@@ -47,9 +47,9 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> --}}
         
-        <div class="col-sm-8">
+        {{-- <div class="col-sm-8"> --}}
             <div class="card">
                 <div class="card-header">
                     <div>
@@ -71,6 +71,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Rombel</th>
+                                <th>Majors_id</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -79,6 +80,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $rombel->rombel }}</td>
+                                    <td>{{ $rombel->majors['majors'] }}</td>
                                     <td>
                                         <form action="{{ route('admin.rombel.destroy', $rombel->id) }}" method="post">
                                         @csrf
@@ -94,7 +96,7 @@
             {!! $rombels->links() !!}
                 </div>
             </div>
-        </div>
-    </div>
+        {{-- </div> --}}
+    {{-- </div> --}}
 </div>
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Majors;
 use App\Rombel;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\PaginatedResourceResponse;
@@ -15,7 +16,7 @@ class RombelController extends Controller
      */
     public function index()
     {
-        $rombels = Rombel::latest()->paginate(5);
+        $rombels = Rombel::orderBy('rombel', 'ASC')->paginate(5);
 
         return view('admin.rombel.index', compact('rombels'));
     }
@@ -25,9 +26,10 @@ class RombelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Majors $major)
     {
-        return view('admin.rombel.create');
+        $major = Majors::orderBy('majors', 'ASC')->get();
+        return view('admin.rombel.create', compact('major'));
     }
 
     /**
@@ -39,11 +41,13 @@ class RombelController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'rombel' => 'required'
+            'rombel' => 'required',
+            'majors_id' => 'required'
         ]);
 
         Rombel::create([
-            'rombel' => $request->rombel
+            'rombel' => $request->rombel,
+            'majors_id' => $request->majors_id
         ]);
 
         return redirect(route('admin.rombel.index'))->withSuccess('Rombel Create Successfully!');

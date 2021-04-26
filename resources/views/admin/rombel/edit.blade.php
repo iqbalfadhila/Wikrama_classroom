@@ -43,6 +43,20 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Majors:</strong>
+                            <select name="majors_id" id="majors_id" class="form-control @error('majors_id') is-invalid @enderror">
+                                <option value="">-----majors----</option>
+                                @foreach($major as $major)
+                                <option value="{{ $major->id }}" {{ $student->majors_id == $major->id ? 'selected' : '' }}>{{ $major->majors }}</option>
+                                @endforeach
+                            </select>
+                            @error('majors_id')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </div>

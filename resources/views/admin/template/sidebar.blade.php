@@ -33,6 +33,7 @@
                     <ul class="pcoded-submenu">
                         <li><a href="{{ route('admin.teacher.index') }}">Teacher</a></li>
                         <li><a href="{{ route('admin.student.index') }}">Student</a></li>
+                        <li><a href="{{ route('admin.supervisor.index') }}">Supervisor</a></li>
                         <li><a href="{{ route('admin.rombel.index') }}">Rombel</a></li>
                         <li><a href="{{ route('admin.rayon.index') }}">Rayon</a></li>
                         <li><a href="{{ route('admin.majors.index') }}">Majors</a></li>

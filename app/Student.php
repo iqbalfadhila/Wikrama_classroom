@@ -31,11 +31,11 @@ class Student extends Model
 
     public function majors()
     {
-        return $this->belongsTo('App\majors');
+        return $this->belongsTo('App\Majors');
     }
 
     public function rayon()
     {
-        return $this->belongsTo('App\rayon', 'rayon_id');
+        return $this->belongsTo('App\Rayon', 'rayon_id');
     }
 }

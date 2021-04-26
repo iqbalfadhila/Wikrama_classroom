@@ -14,4 +14,9 @@ class Majors extends Model
     {
         return $this->hasOne('App\Student');
     }
+
+    public function rombel()
+    {
+        return $this->hasOne('App\Rombel');
+    }
 }

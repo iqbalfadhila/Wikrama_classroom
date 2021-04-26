@@ -37,6 +37,20 @@
                             <input type="text" name="rombel" class="form-control" placeholder="Rombel" value="{{ old("rombel") }}">
                         </div>
                     </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Majors:</strong>
+                            <select name="majors_id" id="majors_id" class="form-control @error('rombel_id') is-invalid @enderror">
+                                <option>-----Majors-----</option>
+                                @foreach($major as $major)
+                                    <option value="{{ $major->id }}" {{$major->id == old('majors_id') ? "selected" : ""}}>{{ $major->majors }}</option>
+                                @endforeach
+                            </select>
+                            @error('majors_id')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                             <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
