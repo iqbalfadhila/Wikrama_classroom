@@ -6,14 +6,14 @@
             <div class="col-lg-12 margin-tb">
                 <div class="card-header">
                     <div class="pull-left">
-                        <h2>Edit Rombel</h2>
+                        <h2>Edit Supervisor</h2>
                     </div>
                 </div>
             </div>
         </div>
         <div class="card-body">
             <div class="pull-right">
-                <a class="btn btn-secondary" href="{{ route('admin.rombel.index') }}"> Back</a>
+                <a class="btn btn-secondary" href="{{ route('admin.supervisor.index') }}"> Back</a>
             </div>       
     
         @if ($errors->any())
@@ -27,33 +27,19 @@
             </div>
         @endif
       
-            <form action="{{ route('admin.rombel.update',$rombel->id) }}" method="POST">
+            <form action="{{ route('admin.supervisor.update',$supervisor->id) }}" method="POST">
                 @csrf
                 @method('PUT')
            
                  <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <strong>rombel</strong>
-                            <input type="text" name="rombel" value="{{ old('rombel') ?? $rombel->rombel}}" class="form-control @error ('rombel') is-invalid @enderror" id="name" placeholder="rombel">
-                            @error('rombel')
+                            <strong>Supervisor</strong>
+                            <input type="text" name="name" value="{{ old('supervisor') ?? $supervisor->name}}" class="form-control @error ('supervisor') is-invalid @enderror" id="name" placeholder="Supervisor">
+                            @error('supervisor')
                                 <div class="invalid-feedback">
                                     {{ $message}}
                                 </div>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="form-group">
-                            <strong>Majors:</strong>
-                            <select name="majors_id" id="majors_id" class="form-control @error('majors_id') is-invalid @enderror">
-                                <option value="">-----majors----</option>
-                                @foreach($major as $major)
-                                <option value="{{ $major->id }}" {{ $rombel->majors_id == $major->id ? 'selected' : '' }}>{{ $major->majors }}</option>
-                                @endforeach
-                            </select>
-                            @error('majors_id')
-                                <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -61,6 +47,7 @@
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
+           
             </form>
         </div>
     </div>

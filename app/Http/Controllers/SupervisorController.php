@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Majors;
-use App\Rombel;
+use App\Supervisor;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\PaginatedResourceResponse;
 
-class RombelController extends Controller
+class SupervisorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +14,9 @@ class RombelController extends Controller
      */
     public function index()
     {
-        $rombels = Rombel::orderBy('rombel', 'ASC')->paginate(5);
+        $supervisors = Supervisor::latest()->paginate(5);
 
-        return view('admin.rombel.index', compact('rombels'));
+        return view('admin.supervisor.index', compact('supervisors'));
     }
 
     /**
@@ -26,10 +24,9 @@ class RombelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Majors $major)
+    public function create()
     {
-        $major = Majors::orderBy('majors', 'ASC')->get();
-        return view('admin.rombel.create', compact('major'));
+        return view('admin.supervisor.create');
     }
 
     /**
@@ -41,16 +38,14 @@ class RombelController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'rombel' => 'required',
-            'majors_id' => 'required'
+            'name' => 'required'
         ]);
 
-        Rombel::create([
-            'rombel' => $request->rombel,
-            'majors_id' => $request->majors_id
+        Supervisor::create([
+            'name' => $request->name
         ]);
 
-        return redirect(route('admin.rombel.index'))->withSuccess('Rombel Create Successfully!');
+        return redirect(route('admin.supervisor.index'))->withSuccess('Supervisor Create Successfully!');
     }
 
     /**
@@ -70,10 +65,9 @@ class RombelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Rombel $rombel, Majors $major)
+    public function edit(Supervisor $supervisor)
     {
-        $major = Majors::orderBy('majors', 'ASC')->get();
-        return view('admin.rombel.edit', compact('rombel', 'major'));
+        return view('admin.supervisor.edit', compact('supervisor'));
     }
 
     /**
@@ -83,16 +77,15 @@ class RombelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rombel $rombel)
+    public function update(Request $request, Supervisor $supervisor)
     {
         $this->validate($request, [
-            'rombel' => 'required',
-            'majors_id' => 'required'
+            'name' => 'required'
         ]);
 
-        $rombel->update($request->all());
+        $supervisor->update($request->all());
 
-        return redirect(route('admin.rombel.index'));
+        return redirect(route('admin.supervisor.index'));
     }
 
     /**
@@ -101,11 +94,11 @@ class RombelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rombel $rombel)
+    public function destroy(Supervisor $supervisor)
     {
-        $rombel->delete();
+        $supervisor->delete();
 
-        return redirect()->route('admin.rombel.index')
-                        ->with('success', 'Rombel delete Successfully!');
+        return redirect()->route('admin.supervisor.index')
+                        ->with('success', 'Supervisor delete successfully');
     }
 }

@@ -39,6 +39,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth', 'role:admin')->group(
     
     Route::resource('student', 'StudentController');
     
+    Route::resource('supervisor', 'SupervisorController');
+
     Route::resource('lesson', 'LessonController');
     
     Route::resource('rombel', 'RombelController');
