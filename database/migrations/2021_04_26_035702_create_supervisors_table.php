@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRayonsTable extends Migration
+class CreateSupervisorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateRayonsTable extends Migration
      */
     public function up()
     {
-        Schema::create('rayons', function (Blueprint $table) {
+        Schema::create('supervisors', function (Blueprint $table) {
             $table->id();
-            $table->string('rayon');
-            $table->unsignedBigInteger('supervisor_id');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateRayonsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rayons');
+        Schema::dropIfExists('supervisors');
     }
 }
