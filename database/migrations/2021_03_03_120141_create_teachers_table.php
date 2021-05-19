@@ -19,6 +19,7 @@ class CreateTeachersTable extends Migration
             $table->string('name');
             $table->unsignedInteger('user_id');
             $table->unsignedBigInteger('lesson_id');
+            // $table->foreign('lesson_id')->references('id')->on('lessons')->onDelete('cascade');
             $table->enum('religion', ['islam', 'protestan', 'katolik', 'hindu', 'buddha', 'khonghucu']);
             $table->enum('gender', ['L', 'P']);
             $table->text('photo')->nullable();

@@ -11,6 +11,8 @@
         <div class="card-body">
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('admin.teacher.create') }}"> Create New Teacher</a>
+                <a class="btn btn-success" href="{{ route('admin.exportteacher') }}"> Export</a>
+                <button type="button" class="btn  btn-primary" data-toggle="modal" data-target="#exampleModalPopovers">Launch demo modal</button>
             </div>
             @if ($message = Session::get('success'))
                 <div class="alert alert-success">
@@ -54,5 +56,29 @@
     {!! $teachers->links() !!}
         </div>
     </div>
+    <!-- [ tooltip-modal ] start -->
+    <div id="exampleModalPopovers" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalPopoversLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalPopoversLabel">Modal Title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <form action="#" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <input type="file" name="file" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn  btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn  btn-primary">Import</button>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- [ tooltip-modal ] end -->
 </div>
 @endsection

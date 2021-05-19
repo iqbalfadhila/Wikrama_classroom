@@ -10,8 +10,17 @@ class Lesson extends Model
         'lesson'
     ];
 
-    public function student()
+    public function teacher()
     {
-        return $this->hasOne('App\Student');
+        return $this->hasMany('App\teacher');
+    }
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($teacher) { // before delete() method call this
+             $teacher->teacher()->delete();
+             // do the rest of the cleanup...
+        });
     }
 }

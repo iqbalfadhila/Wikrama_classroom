@@ -7,6 +7,8 @@ use App\Teacher;
 use App\User;
 use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Http\Request;
+use App\Exports\TeacherExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TeacherController extends Controller
 {
@@ -169,5 +171,10 @@ class TeacherController extends Controller
         // return response()->json(['success' => "delete SuccessFully!"]);
         return redirect()->route('admin.teacher.index')
                         ->with('success', 'Teacher delete Successfully!');
+    }
+
+    public function teacherexport()
+    {
+        return Excel::download(new TeacherExport, 'Teacher.xlsx');
     }
 }

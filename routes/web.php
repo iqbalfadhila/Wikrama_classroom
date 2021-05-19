@@ -36,6 +36,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth', 'role:admin')->group(
     Route::get('/home', 'AdminController@index')->name('home');
 
     Route::resource('teacher', 'TeacherController');
+    Route::get('/exportteacher', 'TeacherController@teacherexport')->name('exportteacher');
     
     Route::resource('student', 'StudentController');
     

@@ -37,7 +37,7 @@
 			<div class="row align-items-center text-center">
 				<div class="col-md-12">
 					<div class="card-body">
-						<img src="assets/images/logo-dark.png" alt="" class="img-fluid mb-4">
+						<img src="assets/images/logo-wk.png" alt="" class="img-fluid mb-4">
 						<h4 class="mb-3 f-w-400">Signin</h4>
 						<div class="form-group mb-3">
 							<label class="floating-label" for="Email">Email address</label>
@@ -63,7 +63,6 @@
 						</div>
 						<button class="btn btn-block btn-primary mb-4">Signin</button>
 						<p class="mb-2 text-muted">Forgot password? <a href="auth-reset-password.html" class="f-w-400">Reset</a></p>
-						<p class="mb-0 text-muted">Don’t have an account? <a href="auth-signup.html" class="f-w-400">Signup</a></p>
 					</div>
 				</div>
 			</div>
