@@ -17,8 +17,10 @@ class CreateTasksTable extends Migration
             $table->id();
             $table->string('title');
             $table->unsignedBigInteger('teacher_id');
-            $table->dateTime('deadline');   
-            $table->bigInteger('created_by');
+            $table->unsignedBigInteger('rombel_id');
+            $table->unsignedBigInteger('lesson_id');
+            $table->dateTime('upload');
+            $table->dateTime('deadline');
             $table->text('description');
             $table->text('file');
             $table->timestamps();

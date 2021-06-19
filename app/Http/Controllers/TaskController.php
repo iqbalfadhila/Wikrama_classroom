@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Lesson;
+use App\Rombel;
 use App\Task;
 use App\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -13,6 +16,11 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function dashboard()
+    {
+        return view('teacher.template.home');
+    }
+
     public function index()
     {
         $tasks = Task::latest()->paginate(5);
@@ -27,8 +35,12 @@ class TaskController extends Controller
      */
     public function create(Teacher $teacher)
     {
-        $teacher  = Teacher::orderBy('name', 'ASC')->get();
-        return view('teacher.task.create', compact('teacher'));
+        $rombel  = Rombel::orderBy('rombel', 'ASC')->get();
+        $lesson  = Lesson::orderBy('lesson', 'ASC')->get();
+
+        $teacher = Teacher::where('user_id', Auth::user()->id)->with('lesson')->first();
+
+        return view('teacher.task.create', compact('rombel', 'lesson', 'teacher'));
     }
 
     /**
@@ -42,6 +54,9 @@ class TaskController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'teacher_id' => 'required',
+            'rombel_id' => 'required',
+            'lesson_id' => 'required',
+            'upload' => 'required',
             'deadline' => 'required',
             'description' => 'required',
             'file' => 'nullable'
@@ -49,7 +64,7 @@ class TaskController extends Controller
 
         Task::create($request->all());
 
-        return redirect()->route('teacher.index')->with('success', 'Data berhasil di tambah');
+        return redirect()->route('teacher.task.index')->with('success', 'Data berhasil di tambah');
     }
 
     /**

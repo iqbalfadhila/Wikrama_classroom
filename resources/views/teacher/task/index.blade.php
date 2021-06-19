@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('teacher.template.dashboard')
 @section('content')
 
 <div class="container">
@@ -10,7 +10,7 @@
         </div>           
         <div class="card-body">
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('task.create') }}"> Create New Task</a>
+                <a class="btn btn-success" href="{{ route('teacher.task.create') }}"> Create New Task</a>
             </div>
             @if ($message = Session::get('success'))
                 <div class="alert alert-success">
@@ -24,7 +24,9 @@
                         <th>ID</th>
                         <th>Title</th>
                         <th>Teacher_id</th>
-                        <th>created_by</th>
+                        <th>Rombel</th>
+                        <th>lesson</th>
+                        <th>upload</th>
                         <th>Deadline</th>
                         <th>Description</th>
                         <th>File</th>
@@ -36,17 +38,19 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $task->title }}</td>
-                            <td>{{ $task->teacher['name'] }}</td>
-                            <td>{{ $task->created_by }}</td>
+                            <td>{{ $task->teacher_id }}</td>
+                            <td>{{ $task->rombel_id }}</td>
+                            <td>{{ $task->lesson_id }}</td>
+                            <td>{{ $task->upload }}</td>
                             <td>{{ $task->deadline }}</td>
                             <td>{{ $task->description }}</td>
                             <td>{{ $task->file }}</td>
                             <td>
-                                <form action="{{ route('task.destroy', $task->id) }}" method="post">
+                                <form action="{{ route('teacher.task.destroy', $task->id) }}" method="post">
                                 @csrf
                                 @method('delete')
-                                <a href="{{ route('task.edit', $task->id) }}" class="btn btn-success btn-sm "><i class="fa fa-pen"></i></a>          
-                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button> 
+                                <a href="{{ route('teacher.task.edit', $task->id) }}" class="btn btn-success btn-sm "><i class="fa fa-pen"></i></a>          
+                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                                 </form>
                             </td>
                         </tr>

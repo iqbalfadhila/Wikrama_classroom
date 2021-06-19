@@ -52,10 +52,16 @@ Route::prefix('admin')->name('admin.')->middleware('auth', 'role:admin')->group(
 
 });
 
-Route::prefix('teacher')->group(function(){
+Route::prefix('teacher')->name('teacher.')->middleware('auth', 'role:teacher')->group(function(){
+    Route::get('/dashboard', 'TaskController@dashboard')->name('dashboard');
+
     Route::resource('task', 'TaskController');
 
 });
+// Route::prefix('teacher')->group(function(){
+//     Route::resource('task', 'TaskController');
+
+// });
 
 Route::prefix('student')->group(function(){
     Route::resource('collect', 'CollectController');

@@ -15,6 +15,11 @@ class Lesson extends Model
         return $this->hasMany('App\teacher');
     }
 
+    // public function user()
+    // {
+    //     return $this->hasMany('App\user');
+    // }
+
     public static function boot() {
         parent::boot();
 
