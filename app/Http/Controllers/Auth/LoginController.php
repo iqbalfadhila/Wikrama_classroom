@@ -45,8 +45,9 @@ class LoginController extends Controller
             return redirect()->route('admin.home');
         } elseif ($user->hasRole('teacher')) {
             return redirect()->route('teacher.dashboard');
+        } else {
+            return redirect()->route('student.dashboard');            
         }
 
-        return redirect()->route('home');
     }
 }

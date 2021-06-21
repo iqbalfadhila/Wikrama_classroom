@@ -45,8 +45,8 @@ class User extends Authenticatable
         return $this->attributes['password'] = Hash::make($password);
     }
 
-    // public function lesson()
-    // {
-    //     return $this->belongsTo('App\Lesson');
-    // }
+    public function lesson()
+    {
+        return $this->belongsTo('App\Lesson');
+    }
 }

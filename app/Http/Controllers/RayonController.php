@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Admin;
 use App\Rayon;
 use Illuminate\Http\Request;
 

@@ -38,8 +38,7 @@ class TaskController extends Controller
         $rombel  = Rombel::orderBy('rombel', 'ASC')->get();
         $lesson  = Lesson::orderBy('lesson', 'ASC')->get();
 
-        $teacher = Teacher::where('user_id', Auth::user()->id)->with('lesson')->first();
-
+        $teacher = Teacher::where('user_id', Auth::user()->id)->first();
         return view('teacher.task.create', compact('rombel', 'lesson', 'teacher'));
     }
 
@@ -84,9 +83,13 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Rombel $rombel, Lesson $lesson, Teacher $teacher, Task $task)
     {
-        //
+        $rombel  = Rombel::orderBy('rombel', 'ASC')->get();
+        $lesson  = Lesson::orderBy('lesson', 'ASC')->get();
+
+        $teacher = Teacher::where('user_id', Auth::user()->id)->first();
+        return view('teacher.task.edit', compact('rombel','lesson','teacher','task'));
     }
 
     /**
@@ -96,9 +99,22 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Task $task)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'teacher_id' => 'required',
+            'rombel_id' => 'required',
+            'lesson_id' => 'required',
+            'upload' => 'required',
+            'deadline' => 'required',
+            'description' => 'required',
+            'file' => 'nullable'
+        ]);
+
+        $task->update($request->all());
+
+        return redirect(route('teacher.task.index'));
     }
 
     /**
@@ -107,8 +123,11 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Task $task)
     {
-        //
+        $task->delete();
+
+        return redirect()->route('teacher.task.index')
+                        ->with('success', 'Task delete successfully');
     }
 }

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('teacher.template.dashboard')
 @section('content')
 <div class="container">
     <div class="card">
