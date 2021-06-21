@@ -93,7 +93,8 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-notification">
                         <div class="pro-head">
-                            <img src="{{ asset('assets/images/user/avatar-1.jpg') }}" class="img-radius" alt="User-Profile-Image">
+                            <img class="img-radius" src="{{ asset('storage/photos/student/'.getProfile()) }}" alt="User-Profile-Image"
+                        style="width: 47px; height: 47px; object-fit: contain">
                             <span>{{ Auth::user()->name }}</span>
                             <a class="dud-logout" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

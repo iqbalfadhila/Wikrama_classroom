@@ -27,7 +27,7 @@
             </div>
         @endif
       
-            <form action="{{ route('admin.student.update',$student->id) }}" method="POST">
+            <form action="{{ route('admin.student.update',$student->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
            
@@ -35,7 +35,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>NIS</strong>
-                            <input type="text" name="nis" id="nis" value="{{ old('nis') ?? $student->nis}}" class="form-control @error ('nis') is-invalid @enderror" id="name" placeholder="nis">
+                            <input disabled type="text" name="nis" id="nis" value="{{ old('nis') ?? $student->nis}}" class="form-control @error ('nis') is-invalid @enderror" id="name" placeholder="nis">
                             @error('nis')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror

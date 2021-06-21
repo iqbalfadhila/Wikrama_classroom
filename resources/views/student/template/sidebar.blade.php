@@ -4,7 +4,8 @@
             
             <div class="">
                 <div class="main-menu-header">
-                    <img class="img-radius" src="{{ asset('assets/images/user/avatar-2.jpg') }}" alt="User-Profile-Image">
+                    <img class="img-radius" src="{{ asset('storage/photos/student/'.getProfile()) }}" alt="User-Profile-Image"
+                        style="width: 47px; height: 47px; object-fit: contain">
                     <div class="user-details">
                         <div id="more-details">{{ Auth::user()->name }} <i class="fa fa-caret-down"></i></div>
                     </div>
@@ -37,6 +38,7 @@
                                 {{ $rombel->rombel->rombel }}
                             </a>
                         </li>
+                            
                         @endforeach
                     </ul>
                 </li>

@@ -27,16 +27,16 @@
             </div>
         @endif
       
-            <form action="{{ route('admin.teacher.update',$teacher->id) }}" method="POST">
+            <form action="{{ route('admin.teacher.update',$teacher->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
            
                  <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <strong>rayon</strong>
-                            <input type="number" name="rayon" value="{{ old('rayon') ?? $teacher->rayon}}" class="form-control @error ('rayon') is-invalid @enderror" id="name" placeholder="rayon">
-                            @error('rayon')
+                            <strong>NIP</strong>
+                            <input disabled type="text" name="nip" value="{{ old('nip') ?? $teacher->nip}}" class="form-control @error ('nip') is-invalid @enderror" id="name" placeholder="NIP">
+                            @error('nip')
                                 <div class="invalid-feedback">
                                     {{ $message}}
                                 </div>
@@ -80,7 +80,12 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Lesson</strong>
-                            <input type="text" name="lesson" value="{{ old('lesson') ?? $teacher->lesson}}" class="form-control @error ('lesson') is-invalid @enderror" id="name" placeholder="lesson">
+                            <select name="lesson_id" id="lesson_id" class="form-control @error('lesson_id') is-invalid @enderror">
+                                <option value="">-----Lesson----</option>
+                                @foreach($lesson as $lesson)
+                                <option value="{{ $lesson->id }}" {{ $teacher->lesson_id == $lesson->id ? 'selected' : '' }}>{{ $lesson->lesson }}</option>
+                                @endforeach
+                            </select>
                             @error('lesson')
                                 <div class="invalid-feedback">
                                     {{ $message}}
@@ -91,11 +96,17 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Religion</strong>
-                            <input type="text" name="religion" value="{{ old('religion') ?? $teacher->religion}}" class="form-control @error ('religion') is-invalid @enderror" id="name" placeholder="religion">
+                            <select name="religion" id="religion" class="form-control @error('religion') is-invalid @enderror">
+                                <option value="">-----Religion-----</option>
+                                <option value="islam" {{$teacher->religion == "islam" ? "selected" : ""}}>Islam</option>
+                                <option value="protestan" {{$teacher->religion == "protestan" ? "selected" : ""}}>Protestan</option>
+                                <option value="katolik" {{$teacher->religion == "katolik" ? "selected" : ""}}>Katolik</option>
+                                <option value="hindu" {{$teacher->religion == "hindu" ? "selected" : ""}}>Hindu</option>
+                                <option value="buddha" {{$teacher->religion == "buddha" ? "selected" : ""}}>Buddha</option>
+                                <option value="khonghucu" {{$teacher->religion == "khonghucu" ? "selected" : ""}}>Khonghucu</option>
+                            </select>
                             @error('religion')
-                                <div class="invalid-feedback">
-                                    {{ $message}}
-                                </div>
+                                <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>

@@ -8,7 +8,7 @@ use App\Rombel;
 use App\Student;
 use App\User;
 
-use Facade\FlareClient\Stacktrace\File;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -61,11 +61,11 @@ class StudentController extends Controller
             'grade' => 'required|in:10,11,12',
             'religion' => 'required|in:islam,protestan,katolik,hindu,buddha,khonghucu',
             'gender' => 'required|in:L,P',
-            'photo' => 'nullable|image'
+            'photo' => 'image|mimes:jpeg,png,jpg'
         ]);
 
         $data_student = collect($request->except(['photo', 'email', 'password', '_token', 'password_confirmation']));
-        $data_user = collect($request->except(['nis', 'rombel_id','majors_id', 'rayon_id', 'kelas', 'agama', 'gender', 'photo', 'password_confirmation', '_token']));
+        $data_user = collect($request->except(['nis', 'rombel_id', 'majors_id', 'rayon_id', 'kelas', 'agama', 'gender', 'photo', 'password_confirmation', '_token']));
 
         if ($request->hasFile('photo')) {
             $file = $request->photo;
@@ -131,7 +131,7 @@ class StudentController extends Controller
     public function update(Request $request, Student $student)
     {
         $this->validate($request, [
-            'nis' => 'required|string|min:8|max:8|unique:students',
+            // 'nis' => 'required|string|min:8|max:8|unique:students',
             'name' => 'required|string',
             'rombel_id' => 'required',
             'majors_id' => 'required',
@@ -139,7 +139,7 @@ class StudentController extends Controller
             'grade' => 'required|in:10,11,12',
             'religion' => 'required|in:islam,protestan,katolik,hindu,buddha,khonghucu',
             'gender' => 'required|in:L,P',
-            'photo' => 'nullable|image'
+            'photo' => 'image|mimes:jpeg,png,jpg'
         ]);
 
         try {
@@ -188,6 +188,6 @@ class StudentController extends Controller
 
         // return response()->json(['success' => "delete SuccessFully!"]);
         return redirect()->route('admin.student.index')
-                        ->with('success', 'Student delete Successfully!');
+            ->with('success', 'Student delete Successfully!');
     }
 }

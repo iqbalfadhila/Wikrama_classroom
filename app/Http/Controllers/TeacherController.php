@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Lesson;
 use App\Teacher;
 use App\User;
-use Facade\FlareClient\Stacktrace\File;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Exports\TeacherExport;
 use Maatwebsite\Excel\Facades\Excel;
@@ -42,6 +42,7 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $this->validate($request, [
             'nip' => 'required|string|min:8|max:8|unique:teachers',
             'name' => 'required|string',
@@ -50,11 +51,11 @@ class TeacherController extends Controller
             'lesson_id' => 'required',
             'religion' => 'required|in:islam,protestan,katolik,hindu,buddha,khonghucu',
             'gender' => 'required|in:L,P',
-            'photo' => 'nullable|image'
+            'photo' => 'image|mimes:jpeg,png,jpg'
         ]);
 
         $data_teacher = collect($request->except(['photo', 'email', 'password', '_token', 'password_confirmation']));
-        $data_user = collect($request->except(['nip','lesson_id', 'religion', 'gender', 'photo', 'password_confirmation', '_token']));
+        $data_user = collect($request->except(['nip', 'lesson_id', 'religion', 'gender', 'photo', 'password_confirmation', '_token']));
 
         if ($request->hasFile('photo')) {
             $file = $request->photo;
@@ -116,12 +117,12 @@ class TeacherController extends Controller
     public function update(Request $request, Teacher $teacher)
     {
         $this->validate($request, [
-            'nip' => 'required|string|min:8|max:8|unique:teachers',
+            // 'nip' => 'required|string|min:8|max:8|unique:teachers',
             'name' => 'required|string',
             'lesson_id' => 'required',
             'religion' => 'required|in:islam,protestan,katolik,hindu,buddha,khonghucu',
             'gender' => 'required|in:L,P',
-            'photo' => 'nullable|image'
+            'photo' => 'image|mimes:jpeg,png,jpg'
         ]);
 
         try {
@@ -170,7 +171,7 @@ class TeacherController extends Controller
 
         // return response()->json(['success' => "delete SuccessFully!"]);
         return redirect()->route('admin.teacher.index')
-                        ->with('success', 'Teacher delete Successfully!');
+            ->with('success', 'Teacher delete Successfully!');
     }
 
     public function teacherexport()

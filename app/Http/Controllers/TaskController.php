@@ -89,7 +89,7 @@ class TaskController extends Controller
         $lesson  = Lesson::orderBy('lesson', 'ASC')->get();
 
         $teacher = Teacher::where('user_id', Auth::user()->id)->first();
-        return view('teacher.task.edit', compact('rombel','lesson','teacher','task'));
+        return view('teacher.task.edit', compact('rombel', 'lesson', 'teacher', 'task'));
     }
 
     /**
@@ -128,6 +128,6 @@ class TaskController extends Controller
         $task->delete();
 
         return redirect()->route('teacher.task.index')
-                        ->with('success', 'Task delete successfully');
+            ->with('success', 'Task delete successfully');
     }
 }
