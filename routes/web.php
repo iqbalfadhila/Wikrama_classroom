@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Routing\RouteRegistrar;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -67,6 +68,7 @@ Route::prefix('student')->name('student.')->middleware('auth', 'role:student')->
     Route::get('/dashboard', 'CollectController@dashboard')->name('dashboard');
 
     Route::resource('collect', 'CollectController');
+    Route::get('/done', 'CollectController@done')->name('done');
 });
 // Route::prefix('student')->group(function(){
 //     Route::resource('collect', 'CollectController');

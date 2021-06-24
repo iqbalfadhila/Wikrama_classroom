@@ -16,6 +16,7 @@ class CreateRayonsTable extends Migration
         Schema::create('rayons', function (Blueprint $table) {
             $table->id();
             $table->string('rayon');
+            $table->unsignedBigInteger('supervisor_id');
             $table->timestamps();
         });
     }

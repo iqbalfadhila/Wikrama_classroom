@@ -38,9 +38,9 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $task->title }}</td>
-                            <td>{{ $task->teacher_id }}</td>
-                            <td>{{ $task->rombel_id }}</td>
-                            <td>{{ $task->lesson_id }}</td>
+                            <td>{{ $task->teacher->name }}</td>
+                            <td>{{ $task->rombel->rombel }}</td>
+                            <td>{{ $task->lesson->lesson }}</td>
                             <td>{{ $task->upload }}</td>
                             <td>{{ $task->deadline }}</td>
                             <td>{{ $task->description }}</td>

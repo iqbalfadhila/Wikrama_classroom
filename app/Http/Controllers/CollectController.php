@@ -23,6 +23,19 @@ class CollectController extends Controller
         return view('student.template.home');
     }
 
+    public function done()
+    {
+        $student = Student::where('user_id', Auth::user()->id)->first();
+        $collect = Collect::where('student_id', $student->id)
+            ->with(
+                'task:id,title,upload,lesson_id,teacher_id',
+                'task.lesson:id,lesson',
+                'task.teacher:id,name'
+            )->paginate(10);
+        // dd($tasks);
+        return view('student.collect.done', compact('collect'));
+    }
+
     public function index()
     {
         $student = Student::select('id', 'user_id', 'rombel_id')
@@ -54,10 +67,11 @@ class CollectController extends Controller
         $this->validate($request, [
             'upload' => 'required'
         ]);
-
+        $student = Student::where('user_id', Auth::user()->id)->first();
         Collect::create([
             'upload' => $request->upload,
             'task_id' => $request->task_id,
+            'student_id' => $student->id,
         ]);
 
         return redirect(route('student.collect.index'))->withSuccess('collect Create Successfully!');

@@ -40,7 +40,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Teacher:</strong>
-                            <input readonly name="teacher_id" type="text" class="form-control" id="name" value="{{Auth::user()->id}}">
+                            <input readonly name="teacher_id" type="text" class="form-control" id="name" value="{{ $teacher->id }}">
                             {{-- <select name="teacher_id" id="teacher_id" class="form-control @error('teacher_id') is-invalid @enderror">
                                 <option>-----Teacher-----</option>
                                 @foreach($teacher as $teacher)

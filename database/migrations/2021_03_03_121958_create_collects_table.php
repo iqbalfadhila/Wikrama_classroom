@@ -15,6 +15,7 @@ class CreateCollectsTable extends Migration
     {
         Schema::create('collects', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('student_id');
             $table->unsignedInteger('task_id');
             $table->text('upload');
             $table->timestamps();

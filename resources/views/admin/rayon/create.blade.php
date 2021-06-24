@@ -37,8 +37,22 @@
                             <input type="text" name="rayon" class="form-control" placeholder="Rayon" value="{{ old("rayon") }}">
                         </div>
                     </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Supervisor:</strong>
+                            <select name="supervisor_id" id="supervisor_id" class="form-control @error('supervisor_id') is-invalid @enderror">
+                                <option>-----Supervisor-----</option>
+                                @foreach($supervisor as $supervisor)
+                                    <option value="{{ $supervisor->id }}" {{$supervisor->id == old('supervisor_id') ? "selected" : ""}}>{{ $supervisor->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('supervisor_id')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
             </form>

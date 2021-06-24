@@ -28,6 +28,10 @@ class Teacher extends Model
 
     public function task()
     {
-        return $this->belongsTo('App\Task');
+        return $this->hasOne('App\Task');
+    }
+    public function collect()
+    {
+        return $this->hasOne('App\collect');
     }
 }

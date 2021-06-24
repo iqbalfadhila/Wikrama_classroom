@@ -4,15 +4,13 @@
 
 <div class="main-content">
   <section class="section">
-    <div class="section-header">
-      <h1>Selamat Datang {{Auth::user()->name}}</h1>
-    </div>
 
     <div class="row">
       <div class="col-lg-8">
         <div class="card" style="background-color: white;">
           <div class="card-header">
-            <h3>{{ $task->title}}</h3>
+            <h3>{{ $task->title }}</h3>
+            <p>{{ $task->teacher->name }}</p>{{ $task->rombel->rombel }} ( {{ date('D-m-y', strtotime($task->upload)) }} - {{ date('D-m-y', strtotime($task->deadline)) }} )
           </div>
           <div class="card-body">
             <div class="container">
@@ -59,7 +57,6 @@
                       <div class="form-group">
                         <label for="exampleInputPassword1">upload</label>
                         <input name="upload" type="file" class="form-control" id="exampleInputPassword1">
-                        <small>*maksimal file 10mb</small>
                       </div>
 
                       {{-- <div class="form-group">

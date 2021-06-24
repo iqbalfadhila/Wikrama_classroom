@@ -15,6 +15,11 @@ class Rombel extends Model
         return $this->hasOne('App\Student');
     }
 
+    public function task()
+    {
+        return $this->hasOne('App\Task');
+    }
+
     public function majors()
     {
         return $this->belongsTo('App\Majors');

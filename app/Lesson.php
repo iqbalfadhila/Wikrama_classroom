@@ -12,20 +12,26 @@ class Lesson extends Model
 
     public function teacher()
     {
-        return $this->hasMany('App\teacher');
+        return $this->hasMany('App\Teacher');
     }
 
     public function user()
     {
-        return $this->hasMany('App\user');
+        return $this->hasMany('App\User');
     }
 
-    public static function boot() {
+    public function task()
+    {
+        return $this->hasOne('App\Task');
+    }
+
+    public static function boot()
+    {
         parent::boot();
 
-        static::deleting(function($teacher) { // before delete() method call this
-             $teacher->teacher()->delete();
-             // do the rest of the cleanup...
+        static::deleting(function ($teacher) { // before delete() method call this
+            $teacher->teacher()->delete();
+            // do the rest of the cleanup...
         });
     }
 }

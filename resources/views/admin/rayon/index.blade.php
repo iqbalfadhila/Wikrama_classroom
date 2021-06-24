@@ -23,6 +23,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Rayon</th>
+                        <th>Supervisor</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -31,6 +32,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $rayon->rayon }}</td>
+                            <td>{{ $rayon->supervisor['name'] }}</td>
                             <td>
                                 <form action="{{ route('admin.rayon.destroy', $rayon->id) }}" method="post">
                                 @csrf

@@ -1,7 +1,15 @@
 @extends('teacher.template.dashboard')
 @section('content')
 <div class="row">
-    <div class="col-lg-7 col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <h2><img class="img-radius" src="{{ asset('assets/images/logo-wk.png') }}" alt="User-Profile-Image" style="width: 60; height: 70px; object-fit: contain"><span> Selamat Datang Di SMK WIKRAMA BOGOR</span></h2>
+        </div>
+        <div class="card-body">
+            <img src="{{ asset('assets/images/gedung.jpg') }}" alt="" style="max-width: 100%; height: auto;">
+        </div>
+    </div>
+    {{-- <div class="col-lg-7 col-md-12">
         <!-- support-section start -->
         <div class="row">
             <div class="col-sm-6">
@@ -210,7 +218,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- seo end -->
 </div>
 @endsection

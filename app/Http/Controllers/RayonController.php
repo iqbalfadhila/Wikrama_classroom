@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Majors;
 use App\Rayon;
+use App\Supervisor;
 use Illuminate\Http\Request;
 
 class RayonController extends Controller
@@ -24,9 +26,10 @@ class RayonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Supervisor $supervisor)
     {
-        return view('admin.rayon.create');
+        $supervisor = Supervisor::orderBy('name', 'ASC')->get();
+        return view('admin.rayon.create', compact('supervisor'));
     }
 
     /**
@@ -38,11 +41,13 @@ class RayonController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'rayon' => 'required'
+            'rayon' => 'required',
+            'supervisor_id' => 'required'
         ]);
 
         Rayon::create([
-            'rayon' => $request->rayon
+            'rayon' => $request->rayon,
+            'supervisor_id' => $request->supervisor_id
         ]);
 
         return redirect(route('admin.rayon.index'))->withSuccess('Rayon Create Successfully!');
@@ -65,9 +70,10 @@ class RayonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Rayon $rayon)
+    public function edit(Rayon $rayon, Supervisor $supervisor)
     {
-        return view('admin.rayon.edit', compact('rayon'));
+        $supervisor = Supervisor::orderBy('name', 'ASC')->get();
+        return view('admin.rayon.edit', compact('rayon', 'supervisor'));
     }
 
     /**
@@ -80,7 +86,8 @@ class RayonController extends Controller
     public function update(Request $request, Rayon $rayon)
     {
         $this->validate($request, [
-            'rayon' => 'required'
+            'rayon' => 'required',
+            'supervisor_id' => 'required'
         ]);
 
         $rayon->update($request->all());
@@ -99,6 +106,6 @@ class RayonController extends Controller
         $rayon->delete();
 
         return redirect()->route('admin.rayon.index')
-                        ->with('success', 'Rayon delete successfully');
+            ->with('success', 'Rayon delete successfully');
     }
 }

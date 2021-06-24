@@ -38,7 +38,7 @@ class TaskController extends Controller
         $rombel  = Rombel::orderBy('rombel', 'ASC')->get();
         $lesson  = Lesson::orderBy('lesson', 'ASC')->get();
 
-        $teacher = Teacher::where('user_id', Auth::user()->id)->first();
+        $teacher = Teacher::select('id', 'lesson_id')->where('user_id', Auth::user()->id)->first();
         return view('teacher.task.create', compact('rombel', 'lesson', 'teacher'));
     }
 
@@ -58,7 +58,7 @@ class TaskController extends Controller
             'upload' => 'required',
             'deadline' => 'required',
             'description' => 'required',
-            'file' => 'nullable'
+            'file' => 'required'
         ]);
 
         Task::create($request->all());
@@ -109,7 +109,7 @@ class TaskController extends Controller
             'upload' => 'required',
             'deadline' => 'required',
             'description' => 'required',
-            'file' => 'nullable'
+            'file' => 'required'
         ]);
 
         $task->update($request->all());

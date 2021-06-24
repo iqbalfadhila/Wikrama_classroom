@@ -24,23 +24,24 @@
                     <label>Home</label>
                 </li>
                 <li class="nav-item">
-                    <a href="home" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+                    <a href="dashboard" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
                 </li>
                 <li class="nav-item pcoded-menu-caption">
                     <label>Data</label>
                 </li>
                 <li class="nav-item pcoded-hasmenu">
-                    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Class</span></a>
+                    @foreach(getAuthRombel() as $rombel)
+                        <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">{{ $rombel->rombel->rombel }}</span></a>
+                    {{-- <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-box"></i></span><span class="pcoded-mtext">Class</span></a> --}}
                     <ul class="pcoded-submenu">
-                        @foreach(getAuthRombel() as $rombel)
                         <li>
-                            <a href="{{ route('student.collect.index') }}">
-                                {{ $rombel->rombel->rombel }}
-                            </a>
+                            <a href="{{ route('student.collect.index') }}">assigned</a>
+                            <a href="#">Missing</a>
+                            <a href="done">Done</a>
                         </li>
                             
-                        @endforeach
                     </ul>
+                    @endforeach
                 </li>
             </ul>
         </div>
